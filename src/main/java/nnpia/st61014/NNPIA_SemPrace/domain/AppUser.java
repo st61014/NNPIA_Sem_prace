@@ -17,7 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AppUser {
     @Id
-    private Integer userID;
+    private Long userID;
     @Column
     @NotNull
     @NotEmpty
@@ -48,17 +48,12 @@ public class AppUser {
     @OneToMany(mappedBy = "listingPoster")
     private List<JobListing> jobListings = Collections.emptyList();
 
-    @ManyToMany
-    @JoinTable(
-            name = "UsersInterestedInJob",
-            joinColumns = @JoinColumn(name = "interestedUserID"),
-            inverseJoinColumns = @JoinColumn(name = "chosenJobListingID")
-    )
+    @ManyToMany(mappedBy = "usersInterestedInListing")
     @ToString.Exclude
     @JsonIgnore
     private List<AppUser> interestedListings = Collections.emptyList();
 
-    public AppUser(Integer id, String username, String password, String firstName, String lastName, String currentWorkingField) {
+    public AppUser(Long id, String username, String password, String firstName, String lastName, String currentWorkingField) {
         this.userID = id;
         this.username = username;
         this.password = password;

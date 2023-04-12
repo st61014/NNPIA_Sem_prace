@@ -17,7 +17,7 @@ import java.util.List;
 @Entity
 public class JobListing {
     @Id
-    private Integer listingID;
+    private Long listingID;
     @Column
     private String jobField;
     @Column
@@ -41,18 +41,6 @@ public class JobListing {
     private List<AppUser> usersInterestedInListing = Collections.emptyList();
 
 
-    /*
-    public TaskDtoV1 toDto() {
-        return new TaskDtoV1(
-                getTaskID(),
-                getTitle(),
-                getDescription(),
-                getCreation_date(),
-                getUpdate_date()
-        );
-    }
-
-     */
 
 
 }
