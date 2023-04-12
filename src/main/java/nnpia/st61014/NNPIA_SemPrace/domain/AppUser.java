@@ -1,16 +1,15 @@
 package nnpia.st61014.NNPIA_SemPrace.domain;
 
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.NotEmpty;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.hibernate.validator.constraints.*;
+
+import java.util.Collections;
+import java.util.List;
 
 
 @Entity
@@ -44,15 +43,22 @@ public class AppUser {
     @NotEmpty
     @Length(min = 1, max = 255)
     private String currentWorkingField;
-    /*
-    @OneToMany(mappedBy = "author")
+
     @EqualsAndHashCode.Exclude
-    private List<JobListing> listings = Collections.emptyList();
-    @ManyToMany(mappedBy = "users")
-    @EqualsAndHashCode.Exclude
-    private List<Role> roles = Collections.emptyList();
-    */
-    public AppUser(Integer id, String username, String password, String firstName,String lastName,String currentWorkingField) {
+    @OneToMany(mappedBy = "listingPoster")
+    private List<JobListing> jobListings = Collections.emptyList();
+
+    @ManyToMany
+    @JoinTable(
+            name = "UsersInterestedInJob",
+            joinColumns = @JoinColumn(name = "interestedUserID"),
+            inverseJoinColumns = @JoinColumn(name = "chosenJobListingID")
+    )
+    @ToString.Exclude
+    @JsonIgnore
+    private List<AppUser> interestedListings = Collections.emptyList();
+
+    public AppUser(Integer id, String username, String password, String firstName, String lastName, String currentWorkingField) {
         this.userID = id;
         this.username = username;
         this.password = password;
@@ -61,7 +67,7 @@ public class AppUser {
         this.currentWorkingField = currentWorkingField;
     }
 
-    public AppUser(String username, String password, String firstName,String lastName,String currentWorkingField) {
+    public AppUser(String username, String password, String firstName, String lastName, String currentWorkingField) {
         this.username = username;
         this.password = password;
         this.firstName = firstName;

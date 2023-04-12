@@ -9,4 +9,5 @@ public class UsersInterestedInJob {
     private String status;
     @Column
     private LocalDateTime creation_date;
+
 }
