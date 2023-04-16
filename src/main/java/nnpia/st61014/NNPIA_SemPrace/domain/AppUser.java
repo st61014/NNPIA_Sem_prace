@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
+import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseDto;
 import org.hibernate.validator.constraints.*;
 
 import java.util.Collections;
@@ -47,11 +48,21 @@ public class AppUser {
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "listingPoster")
     private List<JobListing> jobListings = Collections.emptyList();
+/*
+    @EqualsAndHashCode.Exclude
+    @OneToMany(mappedBy = "userInterestedInListing")
+    private List<UsersInterestedInJob> interestedInJobs = Collections.emptyList();
 
+ */
+
+
+/*
     @ManyToMany(mappedBy = "usersInterestedInListing")
     @ToString.Exclude
     @JsonIgnore
     private List<AppUser> interestedListings = Collections.emptyList();
+
+ */
 
     public AppUser(Long id, String username, String password, String firstName, String lastName, String currentWorkingField) {
         this.userID = id;
@@ -69,18 +80,18 @@ public class AppUser {
         this.lastName = lastName;
         this.currentWorkingField = currentWorkingField;
     }
-/*
-    public AppUserResponseDtoV1 toDto() {
-        return new AppUserResponseDtoV1(
+
+    public AppUserResponseDto toDto() {
+        return new AppUserResponseDto(
                 getUserID(),
                 getUsername(),
                 getPassword(),
-                getActive(),
-                getCreation_date(),
-                getUpdate_date(),
-                getRoles()
+                getFirstName(),
+                getLastName(),
+                getCurrentWorkingField(),
+                getJobListings()
         );
     }
-    */
+
 
 }

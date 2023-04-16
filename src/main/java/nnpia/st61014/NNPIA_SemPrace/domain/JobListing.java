@@ -30,6 +30,7 @@ public class JobListing {
     @ToString.Exclude
     private AppUser listingPoster;
 
+    /*
     @ManyToMany
     @JoinTable(
             name = "UsersInterestedInJob",
@@ -40,6 +41,8 @@ public class JobListing {
     @JsonIgnore
     private List<AppUser> usersInterestedInListing = Collections.emptyList();
 
+
+     */
 
 
 
