@@ -16,19 +16,6 @@ import java.util.stream.Collectors;
 @AllArgsConstructor
 public class AppUserController {
     private final AppUserService appUserService;
-/*
-    @GetMapping("")
-    public ResponseEntity<List<AppUserResponseDtoV1>> findAll() {
-        var result = appUserService.findAllByActiveEquals();
-
-        return ResponseEntity.ok(result
-                .stream()
-                .map(AppUser::toDto)
-                .collect(Collectors.toList())
-        );
-    }
-
- */
 
     @GetMapping("/{id}")
     public ResponseEntity<?> findById(@PathVariable final Long id) throws ResourceNotFoundException {
