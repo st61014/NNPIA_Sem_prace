@@ -5,9 +5,11 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/postgres
+    url: jdbc:postgresql://localhost:5432/SemPrace
     username: postgres
     password: 00azz55
+    hikari:
+      schema: NNPIA
   jpa:
     hibernate:
       ddl-auto: update

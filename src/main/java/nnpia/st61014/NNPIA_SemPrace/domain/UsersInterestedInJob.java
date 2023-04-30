@@ -50,5 +50,5 @@ class UserJobId implements Serializable {
     @ManyToOne
     private JobListing jobListing;
 
-    // Constructors, getters, and setters
+
 }

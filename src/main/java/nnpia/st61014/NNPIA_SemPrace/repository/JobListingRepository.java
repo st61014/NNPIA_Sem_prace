@@ -8,5 +8,6 @@ import java.util.List;
 
 @Repository
 public interface JobListingRepository extends PagingAndSortingRepository<JobListing, Long> {
-        List<JobListing> findJobListingByListingIDEquals(long jobListingID);
+        JobListing findJobListingByListingIDEquals(long jobListingID);
+        List<JobListing> findAll();
         }

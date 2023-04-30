@@ -6,6 +6,8 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.ToString;
+import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseDto;
+import nnpia.st61014.NNPIA_SemPrace.dto.JobListingResponseDto;
 
 
 import java.time.LocalDateTime;
@@ -28,6 +30,7 @@ public class JobListing {
     @ManyToOne
     @JoinColumn(name="listingPosterID", nullable=false)
     @ToString.Exclude
+    @JsonIgnore
     private AppUser listingPoster;
 
     /*
@@ -44,6 +47,14 @@ public class JobListing {
 
      */
 
-
+    public JobListingResponseDto toDto() {
+        return new JobListingResponseDto(
+                getListingID(),
+                getJobField(),
+                getPosition(),
+                getPay(),
+                getListingPoster().getUserID()
+        );
+    }
 
 }
