@@ -17,7 +17,7 @@ const JobListingDetail = () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
         const result = await fetch(`${backendUrl}/job-listing/${id}`);
-        console.log(result);
+        //console.log(await (result));
         setData(await (result.json()));
         setLoading(false);
     };

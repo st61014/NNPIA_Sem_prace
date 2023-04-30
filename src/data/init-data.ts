@@ -1,7 +1,7 @@
 export interface JobListing {
     id: number
-    job_field: string
+    jobField: string
     position: string
     pay: number
-    posterId: number
+    listingPosterId: number
 }

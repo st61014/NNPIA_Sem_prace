@@ -15,9 +15,10 @@ const JobListings = () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         let response = null;
 
-        response = await fetch("http://localhost:9000/api/v1/job-listing");
-        console.log(response);
-        return await response.json();
+        response = await fetch(`${backendUrl}/job-listing`);
+        let jsonResponse = await response.json();
+        //console.table(jsonResponse);
+        return jsonResponse;
     };
 
     //const isLoggedIn = useSelector((state: RootState) => state.login.value);
@@ -27,7 +28,7 @@ const JobListings = () => {
     if (isLoading){
         return <div className="alert alert-danger">loading</div>
     }
-
+    //console.log(data);
     return <div className="tasks">
         {isError && <div className="alert alert-danger">{JSON.stringify(error)}</div>}
         <JobListingList tasks={data}/>

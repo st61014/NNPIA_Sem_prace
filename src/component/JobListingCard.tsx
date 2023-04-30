@@ -13,15 +13,12 @@ const JobListingCard = ({task, onTaskDone} : Props) => {
         onTaskDone(task);
         console.table(task);
     };
-
+    console.log(task);
     return <div>
         <h2>{task.position}</h2>
-        <p>{task.job_field}</p>
+        <p>{task.jobField}</p>
         <p>{task.pay}</p>
-        <p>{task.posterId}</p>
-        <br />
-        <label>Splněno</label>
-        <input type="checkbox" checked={false} name="done" onChange={doneClickHandle} />
+        <p>{task.listingPosterId}</p>
     </div>
 }
 
