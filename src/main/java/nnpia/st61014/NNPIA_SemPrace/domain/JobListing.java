@@ -1,7 +1,9 @@
 package nnpia.st61014.NNPIA_SemPrace.domain;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -27,10 +29,10 @@ public class JobListing {
     @Column
     private Double pay;
 
-    @ManyToOne
+    @ManyToOne()
     @JoinColumn(name="listingPosterID", nullable=false)
-    @ToString.Exclude
-    @JsonIgnore
+    //@ToString.Exclude
+    @JsonBackReference
     private AppUser listingPoster;
 
     /*

@@ -9,11 +9,10 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebMvc
-@Order(Ordered.HIGHEST_PRECEDENCE)
 public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
-        registry.addMapping("/api/v1/job-listing/**")
+        registry.addMapping("/**")
                 .allowedOrigins("http://127.0.0.1:5173")
                 .allowedOrigins("http://localhost:5173")
                 .allowedMethods("*")
