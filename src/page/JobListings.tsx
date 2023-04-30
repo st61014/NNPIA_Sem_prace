@@ -1,5 +1,5 @@
-import TaskList from "../component/TaskList";
-import {Task} from "../data/init-data";
+import JobListingList from "../component/JobListingList";
+import {JobListing} from "../data/init-data";
 import {useEffect, useState} from "react";
 import './Tasks.css';
 import {useSelector} from "react-redux";
@@ -7,20 +7,20 @@ import {RootState} from "../features/store";
 import {useTask} from "../features/hook/hooks";
 import {useQuery} from "@tanstack/react-query";
 import {queryKey} from "@tanstack/react-query/build/lib/__tests__/utils";
-import TaskForm from "../component/TaskForm";
+import JobListingForm from "../component/JobListingForm";
 
-const Tasks = () => {
+const JobListings = () => {
     const fetchData = async () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         let response = null;
 
-        response = await fetch(`${backendUrl}/task`);
+        response = await fetch(`${backendUrl}/job-listing`);
 
         return await response.json();
     };
 
     //const isLoggedIn = useSelector((state: RootState) => state.login.value);
-    const {isLoading, data, isError, error} = useQuery({queryKey: ['tasks'], queryFn: fetchData})
+    const {isLoading, data, isError, error} = useQuery({queryKey: ['joblistings'], queryFn: fetchData})
     //const {error, loading, tasks}=useTask(isLoggedIn);
 
     if (isLoading){
@@ -29,9 +29,9 @@ const Tasks = () => {
 
     return <div className="tasks">
         {isError && <div className="alert alert-danger">{JSON.stringify(error)}</div>}
-        <TaskList tasks={data}/>
-        <TaskForm/>
+        <JobListingList tasks={data}/>
+        <JobListingForm/>
     </div>
 };
 
-export default Tasks;
+export default JobListings;

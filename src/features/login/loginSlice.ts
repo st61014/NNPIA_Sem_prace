@@ -12,7 +12,6 @@ export const loginSlice = createSlice({
     name: 'login',
     initialState,
     reducers: {
-        // Use the PayloadAction type to declare the contents of `action.payload`
         setLogin: (state, action: PayloadAction<boolean>) => {
             state.value = action.payload
             localStorage.setItem('login', `${action.payload}`)

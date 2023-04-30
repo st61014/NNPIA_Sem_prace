@@ -9,7 +9,7 @@ const resolver = yupResolver(yup.object({
 interface FormValues{
     title: String
 }
-const TaskForm = () => {
+const JobListingForm = () => {
 
     const {register, handleSubmit, formState:{errors}} = useForm<FormValues>({resolver})
 
@@ -26,4 +26,4 @@ const TaskForm = () => {
         </form>
     </>
 }
-export default TaskForm;
+export default JobListingForm;

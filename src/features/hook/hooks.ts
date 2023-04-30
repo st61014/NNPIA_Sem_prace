@@ -1,8 +1,8 @@
 import {useEffect, useState} from "react";
-import {Task} from "../../data/init-data";
+import {JobListing} from "../../data/init-data";
 
 export const useTask = (isLoggedIn: boolean) => {
-    const [tasks, setTasks] = useState<Task[]>([]);
+    const [tasks, setTasks] = useState<JobListing[]>([]);
     const [error, setError] = useState<string | null>(null);
     const [loading, setLoading] = useState<boolean | null>(false);
 
@@ -18,7 +18,7 @@ export const useTask = (isLoggedIn: boolean) => {
         let response = null;
 
         try {
-            response = await fetch(`${backendUrl}/task`);
+            response = await fetch(`${backendUrl}/job-listing`);
         } catch (e: any) {
             setError(e.message);
             setTasks([]);
