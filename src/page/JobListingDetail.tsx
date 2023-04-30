@@ -3,7 +3,7 @@ import {JobListing} from "../data/init-data";
 import JobListingCard from "../component/JobListingCard";
 import {useParams} from "react-router";
 
-const TaskDetail = () => {
+const JobListingDetail = () => {
     const {id} = useParams<'id'>();
 
     const [loading, setLoading] = useState<boolean>(true)
@@ -17,6 +17,7 @@ const TaskDetail = () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
 
         const result = await fetch(`${backendUrl}/job-listing/${id}`);
+        console.log(result);
         setData(await (result.json()));
         setLoading(false);
     };
@@ -27,4 +28,4 @@ const TaskDetail = () => {
     </div>
 };
 
-export default TaskDetail;
+export default JobListingDetail;

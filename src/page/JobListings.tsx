@@ -1,21 +1,22 @@
 import JobListingList from "../component/JobListingList";
 import {JobListing} from "../data/init-data";
 import {useEffect, useState} from "react";
-import './Tasks.css';
+import './JobListings.css';
 import {useSelector} from "react-redux";
 import {RootState} from "../features/store";
 import {useTask} from "../features/hook/hooks";
 import {useQuery} from "@tanstack/react-query";
 import {queryKey} from "@tanstack/react-query/build/lib/__tests__/utils";
 import JobListingForm from "../component/JobListingForm";
+import header from "../component/ui/Header";
 
 const JobListings = () => {
     const fetchData = async () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         let response = null;
 
-        response = await fetch(`${backendUrl}/job-listing`);
-
+        response = await fetch("http://localhost:9000/api/v1/job-listing");
+        console.log(response);
         return await response.json();
     };
 
