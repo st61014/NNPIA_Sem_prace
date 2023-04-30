@@ -6,9 +6,11 @@ import nnpia.st61014.NNPIA_SemPrace.service.JobListingService;
 import nnpia.st61014.NNPIA_SemPrace.service.ResourceNotFoundException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
 @RestController
 @RequestMapping("/job-listing")
 @AllArgsConstructor
+
 public class JobListingController {
     private final JobListingService jobListingService;
 
