@@ -10,12 +10,12 @@ import {queryKey} from "@tanstack/react-query/build/lib/__tests__/utils";
 import JobListingForm from "../component/JobListingForm";
 import header from "../component/ui/Header";
 
-const JobListings = () => {
+const JobOfferings = () => {
     const fetchData = async () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         let response = null;
 
-        response = await fetch(`${backendUrl}/job-listing`);
+        response = await fetch(`${backendUrl}/job-offering`);
         let jsonResponse = await response.json();
         //console.table(jsonResponse);
         return jsonResponse;
@@ -29,11 +29,11 @@ const JobListings = () => {
         return <div className="alert alert-danger">loading</div>
     }
     //console.log(data);
-    return <div className="jobListings">
+    return <div className="tasks">
         {isError && <div className="alert alert-danger">{JSON.stringify(error)}</div>}
         <JobListingList jobListings={data}/>
         <JobListingForm/>
     </div>
 };
 
-export default JobListings;
+export default JobOfferings;

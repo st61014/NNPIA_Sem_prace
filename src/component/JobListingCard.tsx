@@ -2,23 +2,24 @@ import {JobListing} from "../data/init-data";
 import React from "react";
 
 interface Props {
-    task: JobListing
-    onTaskDone: (task: JobListing) => void
+    job_listing: JobListing
+    onJobShowInterest: (jobListing: JobListing) => void
 }
 
-const JobListingCard = ({task, onTaskDone} : Props) => {
-    const doneClickHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
-        task.position = "e.target.checked";
+const JobListingCard = ({job_listing, onJobShowInterest} : Props) => {
+    const showInterestHandle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        job_listing.position = "e.target.checked";
 
-        onTaskDone(task);
-        console.table(task);
+        onJobShowInterest(job_listing);
     };
-    console.log(task);
+    console.log(job_listing);
     return <div>
-        <h2>{task.position}</h2>
-        <p>{task.jobField}</p>
-        <p>{task.pay}</p>
-        <p>{task.listingPosterId}</p>
+        <h2>{job_listing.position}</h2>
+        <p>{job_listing.jobField}</p>
+        <p>{job_listing.pay}</p>
+        <p>{job_listing.listingPosterId}</p>
+        <label>Show interest</label>
+        <input type="checkbox" checked={false} name="done" onChange={showInterestHandle} />
     </div>
 }
 

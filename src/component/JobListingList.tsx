@@ -2,17 +2,17 @@ import {JobListing} from "../data/init-data";
 import JobListingCard from "./JobListingCard";
 
 interface Props {
-    tasks: Array<JobListing>
+    jobListings: Array<JobListing>
 }
 
-const JobListingList = ({tasks} : Props) => {
-    const taskDoneHandle = (task: JobListing) => {
+const JobListingList = ({jobListings} : Props) => {
+    const jobListingShowInterestHandle = (task: JobListing) => {
     }
     //console.log(tasks);
     return <div>
         <h1>Jobs</h1>
-        {tasks.map(t =>
-            <JobListingCard key={t.id} task={t} onTaskDone={taskDoneHandle} />
+        {jobListings.map(t =>
+            <JobListingCard key={t.id} job_listing={t} onJobShowInterest={jobListingShowInterestHandle} />
         )}
     </div>
 };

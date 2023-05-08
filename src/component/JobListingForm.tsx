@@ -18,7 +18,7 @@ const JobListingForm = () => {
     }
 
     return <>
-        <h1>Nový task</h1>
+        <h1>Pull tasks</h1>
         <form onSubmit={handleSubmit(submitHandle)}>
             <input {...register("title")}/>
             {errors.title && <p>{errors.title.message}</p>}
