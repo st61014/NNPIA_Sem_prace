@@ -2,14 +2,12 @@ package nnpia.st61014.NNPIA_SemPrace.controller;
 
 
 import lombok.AllArgsConstructor;
+import nnpia.st61014.NNPIA_SemPrace.domain.AppUser;
 import nnpia.st61014.NNPIA_SemPrace.service.AppUserService;
 import nnpia.st61014.NNPIA_SemPrace.service.ResourceNotFoundException;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
-import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/app-user")
@@ -23,6 +21,7 @@ public class AppUserController {
 
         return ResponseEntity.ok(result.toDto());
     }
+
 /*
     @PostMapping("")
     public ResponseEntity<AppUserResponseDtoV1> create(@RequestBody @Validated final AppUserResponseInputDtoV1 input) {

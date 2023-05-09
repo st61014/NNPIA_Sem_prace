@@ -1,13 +1,13 @@
 package nnpia.st61014.NNPIA_SemPrace.domain;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseDto;
+import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseInputDto;
 import org.hibernate.validator.constraints.*;
 
 import java.util.Collections;
@@ -82,7 +82,15 @@ public class AppUser {
         this.lastName = lastName;
         this.currentWorkingField = currentWorkingField;
     }
-
+    private static AppUser toEntity(final AppUserResponseInputDto input) {
+        return new AppUser(
+                input.getUsername(),
+                input.getPassword(),
+                "",
+                "",
+                ""
+        );
+    }
     public AppUserResponseDto toDto() {
         return new AppUserResponseDto(
                 getUserID(),
