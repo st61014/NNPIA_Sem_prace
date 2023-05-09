@@ -12,6 +12,9 @@ import InterestedJobOfferingCard from "./component/InterestedJobOfferingCard";
 import InterestedJobOfferingDetail from "./page/InterestedJobOfferingDetail";
 
 const queryClient = new QueryClient();
+
+
+
 function App() {
     
     return (
