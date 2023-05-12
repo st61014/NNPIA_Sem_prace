@@ -30,7 +30,6 @@ public class SecurityConfig {
     public SecurityConfig(AppUserService userDetailsService, JwtAuthEntryPoint authEntryPoint) {
         this.userDetailsService = userDetailsService;
         this.authEntryPoint = authEntryPoint;
-        //System.out.println(BCrypt.hashpw("pass2", BCrypt.gensalt()));
     }
 
     @Bean
@@ -39,20 +38,11 @@ public class SecurityConfig {
                         .requestMatchers("/signin")
                         .permitAll()
                         .anyRequest().authenticated()
-                )
-                .formLogin(form -> form
-                        //.loginPage("/login")
-                        .failureUrl("/login?error=true")
-                        .permitAll())
-                .logout(logout -> logout
-                        .logoutUrl("/logout")
-                        .logoutSuccessUrl("/login?logout")
-                        .permitAll())
+                ).formLogin().disable()
                 // .httpBasic(Customizer.withDefaults());
                 .httpBasic(httpBasicConfigurer_ -> {
                     httpBasicConfigurer_.authenticationEntryPoint(authEntryPoint);
                 });
-
         http.csrf().disable();
         http.headers().frameOptions().disable();
         http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);

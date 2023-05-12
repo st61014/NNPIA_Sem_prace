@@ -21,7 +21,6 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
             throws IOException, ServletException {
 
         HttpStatus status = HttpStatus.UNAUTHORIZED;
-        //log.error("Failed Authentication: {}", authException.getMessage(), authException);
         response.setStatus(status.value());
         response.sendError(status.value(), "Unauthorized Access");
     }

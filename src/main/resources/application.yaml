@@ -3,6 +3,9 @@ server:
   servlet:
     context-path: /api/v1
 spring:
+  security:
+    jwt:
+      secret: hU/Mh35Ta682Pbroz3Ph4Fm36EBwbZMM364SmEWRIOTeNc1i3Oue9RplXYs31AMqU8j0AGN6EqvdSwHh855P6A==
   datasource:
     url: jdbc:postgresql://localhost:5432/SemPrace
     username: postgres
