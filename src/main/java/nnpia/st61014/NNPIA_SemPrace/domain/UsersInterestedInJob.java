@@ -2,13 +2,10 @@ package nnpia.st61014.NNPIA_SemPrace.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
-import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseDto;
-import nnpia.st61014.NNPIA_SemPrace.dto.UsersInterstedInJobDto;
+import nnpia.st61014.NNPIA_SemPrace.dto.UsersInterestedInJobDto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
-import java.util.Collections;
-import java.util.List;
 
 @Entity
 @Table(name = "users_interested_in_job")
@@ -31,8 +28,8 @@ public class UsersInterestedInJob {
     @Column
     private LocalDateTime creation_date;
 
-    public UsersInterstedInJobDto toDto() {
-        return new UsersInterstedInJobDto(
+    public UsersInterestedInJobDto toDto() {
+        return new UsersInterestedInJobDto(
                 getAppUser().getUserID(),
                 getJobListing().getListingID(),
                 getStatus(),

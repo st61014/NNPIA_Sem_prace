@@ -27,14 +27,15 @@ public class AuthController {
     private JWTGenerator jwtGenerator;
 
 
-    @GetMapping("/signin")
+    @PostMapping("/signin")
     public ResponseEntity<AuthResponseDto> login(@RequestBody LoginDto loginDto){
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         loginDto.getUsername(),
                         loginDto.getPassword()));
         SecurityContextHolder.getContext().setAuthentication(authentication);
-        String token = jwtGenerator.generateToken(authentication);
+        Long userID = userRepository.findAppUserByUsername(loginDto.getUsername()).get().getUserID();
+        String token = jwtGenerator.generateToken(authentication, userID);
         return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
 /*

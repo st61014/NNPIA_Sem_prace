@@ -8,13 +8,15 @@ import nnpia.st61014.NNPIA_SemPrace.repository.UsersInterestedInJobRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
+
 @Service
 @AllArgsConstructor
 public class UsersInterestedInJobService {
     private final UsersInterestedInJobRepository usersInterestedInJobRepositoryRepository;
 
     @Transactional(readOnly = true)
-    public UsersInterestedInJob findByUserId(Long id) throws ResourceNotFoundException {
+    public List<UsersInterestedInJob> findByUserId(Long id) throws ResourceNotFoundException {
         var result = usersInterestedInJobRepositoryRepository.findUsersInterestedInJobByAppUserUserID(id);
 
         if (result == null) {

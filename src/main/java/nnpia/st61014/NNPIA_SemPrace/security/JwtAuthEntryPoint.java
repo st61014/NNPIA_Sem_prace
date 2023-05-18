@@ -11,13 +11,14 @@ import org.springframework.stereotype.Component;
 
 import java.io.Console;
 import java.io.IOException;
+
 @RequiredArgsConstructor
 @Component
 public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
     @Override
-    public void commence(      HttpServletRequest request,
-                               HttpServletResponse response,
-                               AuthenticationException authException)
+    public void commence(HttpServletRequest request,
+                         HttpServletResponse response,
+                         AuthenticationException authException)
             throws IOException, ServletException {
 
         HttpStatus status = HttpStatus.UNAUTHORIZED;
