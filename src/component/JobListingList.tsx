@@ -6,9 +6,9 @@ interface Props {
 }
 
 const JobListingList = ({jobListings} : Props) => {
-    const jobListingShowInterestHandle = (task: JobListing) => {
+    const jobListingShowInterestHandle = () => {
     }
-    //console.log(tasks);
+    //console.log(jobListings);
     return <div>
         <h1>Jobs</h1>
         {jobListings.map(t =>

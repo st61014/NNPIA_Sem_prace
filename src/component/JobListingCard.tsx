@@ -12,7 +12,7 @@ const JobListingCard = ({job_listing, onJobShowInterest} : Props) => {
 
         onJobShowInterest(job_listing);
     };
-    console.log(job_listing);
+    //console.log(job_listing);
     return <div>
         <h2>{job_listing.position}</h2>
         <p>{job_listing.jobField}</p>

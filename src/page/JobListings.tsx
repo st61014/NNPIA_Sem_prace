@@ -15,16 +15,19 @@ const JobListings = () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         let response = null;
 
-        response = await fetch(`${backendUrl}/job-listing`);
+        response = await fetch(`${backendUrl}/job-listing`,{
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+        });
         let jsonResponse = await response.json();
-        //console.table(jsonResponse);
         return jsonResponse;
     };
 
     //const isLoggedIn = useSelector((state: RootState) => state.login.value);
     const {isLoading, data, isError, error} = useQuery({queryKey: ['joblistings'], queryFn: fetchData})
     //const {error, loading, tasks}=useTask(isLoggedIn);
-
+    //console.log(data);
     if (isLoading){
         return <div className="alert alert-danger">loading</div>
     }
