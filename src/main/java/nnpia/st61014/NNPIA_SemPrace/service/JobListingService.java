@@ -14,7 +14,10 @@ import java.util.List;
 @AllArgsConstructor
 public class JobListingService {
     private final JobListingRepository jobListingRepository;
-
+    @Transactional
+    public JobListing save(final JobListing jobListing) {
+        return jobListingRepository.save(jobListing);
+    }
     @Transactional(readOnly = true)
     public JobListing findById(Long id) throws ResourceNotFoundException {
         var result = jobListingRepository.findJobListingByListingIDEquals(id);

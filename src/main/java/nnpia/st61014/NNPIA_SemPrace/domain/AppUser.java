@@ -19,6 +19,7 @@ import java.util.List;
 @NoArgsConstructor
 public class AppUser {
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long userID;
     @Column
     @NotNull
@@ -82,7 +83,7 @@ public class AppUser {
         this.lastName = lastName;
         this.currentWorkingField = currentWorkingField;
     }
-    private static AppUser toEntity(final AppUserResponseInputDto input) {
+    private AppUser toEntity(final AppUserResponseInputDto input) {
         return new AppUser(
                 input.getUsername(),
                 input.getPassword(),

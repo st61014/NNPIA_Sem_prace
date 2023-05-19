@@ -7,11 +7,14 @@ import nnpia.st61014.NNPIA_SemPrace.security.JWTGenerator;
 import nnpia.st61014.NNPIA_SemPrace.service.ResourceNotFoundException;
 import nnpia.st61014.NNPIA_SemPrace.service.UsersInterestedInJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/job-interest")
@@ -28,6 +31,25 @@ public class UsersInterestedInJobController {
             DTOs.add(record.toDto());
         }
         return ResponseEntity.ok(DTOs);
+    }
+    @GetMapping("/test")
+    public ResponseEntity<List<Map<String, Object>>> getInterestsByUserId(
+            @RequestHeader (name="Authorization") String token,
+            @RequestParam("page") int page) throws ResourceNotFoundException {
+
+        Page<Object[]> interests = usersInterestedInJobService.findInterestsByUserIdWithJobDetails(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))), page);
+        List<Object[]> content = interests.getContent();
+        List<Map<String, Object>> response = new ArrayList<>();
+        for (Object[] interest : interests) {
+            Map<String, Object> interestMap = new LinkedHashMap<>();
+            interestMap.put("job_field", interest[0]);
+            interestMap.put("position", interest[1]);
+            interestMap.put("pay", interest[2]);
+            interestMap.put("creation_date", interest[3]);
+            interestMap.put("status", interest[4]);
+            response.add(interestMap);
+        }
+        return ResponseEntity.ok(response);
     }
     @GetMapping("/job/{id}")
     public ResponseEntity<?> findByJobId(@PathVariable final Long id) throws ResourceNotFoundException {
