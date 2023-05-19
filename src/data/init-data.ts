@@ -19,3 +19,11 @@ export interface UsersInterestedInJob {
     creation_date: string
     status: string
 }
+
+export interface JobsInterestedIn {
+    job_field: string
+    position: string
+    pay: number
+    creation_date: string
+    status: string
+}

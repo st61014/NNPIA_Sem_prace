@@ -12,6 +12,7 @@ import InterestedJobOfferingCard from "./component/InterestedJobOfferingCard";
 import InterestedJobOfferingDetail from "./page/InterestedJobOfferingDetail";
 import LoginPage from "./page/LoginPage";
 import InterestedInOfferings from "./page/InterestedInOfferings";
+import CreateJobListing from "./page/CreateJobListing";
 
 const queryClient = new QueryClient();
 
@@ -27,7 +28,8 @@ function App() {
                     <Routes>
                         <Route path={"/job-listings"} element={<JobListings/>}/>
                         <Route path={"/login"} element={<LoginPage/>}/>
-                        <Route path={"/job-offerings"} element={<InterestedInOfferings/>}/>
+                        <Route path={"/job-listing/create"} element={<CreateJobListing/>}/>
+                        <Route path={"/job-interests"} element={<InterestedInOfferings/>}/>
                         <Route path={"/job-listing/:id"} element={<JobListingDetail/>}/>
                         <Route path={"/job-interest/:id"} element={<InterestedJobOfferingDetail/>}/>
                     </Routes>

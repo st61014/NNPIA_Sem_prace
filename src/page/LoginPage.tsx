@@ -1,9 +1,11 @@
 import React, {ChangeEvent, useState} from "react";
+import {setLogin} from "../features/login/loginSlice";
+import {useAppDispatch} from "../features/hook";
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
-
+    const dispatch = useAppDispatch();
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
     };
@@ -27,7 +29,7 @@ const LoginPage = () => {
                 const { accessToken, tokenType, userID } = await response.json();
                 localStorage.setItem("token", accessToken);
                 localStorage.setItem("bearer", tokenType);
-                //localStorage.setItem("userID", userID);
+                dispatch(setLogin(true));
                 // Redirect or perform any other necessary action upon successful login
             } else {
                 // Handle login error
