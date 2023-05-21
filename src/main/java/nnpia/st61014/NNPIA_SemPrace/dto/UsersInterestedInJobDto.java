@@ -14,6 +14,6 @@ public class UsersInterestedInJobDto {
     private Long app_user_userid;
     private Long job_listing_listingid;
     private String status;
-    private LocalDateTime creation_date;
+    private String creation_date;
 
 }

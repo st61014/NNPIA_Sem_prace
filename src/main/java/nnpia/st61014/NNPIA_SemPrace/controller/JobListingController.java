@@ -2,12 +2,14 @@ package nnpia.st61014.NNPIA_SemPrace.controller;
 
 import lombok.AllArgsConstructor;
 import nnpia.st61014.NNPIA_SemPrace.domain.JobListing;
+import nnpia.st61014.NNPIA_SemPrace.domain.UsersInterestedInJob;
 import nnpia.st61014.NNPIA_SemPrace.dto.JobListingInputDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.JobListingResponseDto;
 import nnpia.st61014.NNPIA_SemPrace.security.JWTGenerator;
 import nnpia.st61014.NNPIA_SemPrace.service.AppUserService;
 import nnpia.st61014.NNPIA_SemPrace.service.JobListingService;
 import nnpia.st61014.NNPIA_SemPrace.service.ResourceNotFoundException;
+import nnpia.st61014.NNPIA_SemPrace.service.UsersInterestedInJobService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -22,9 +24,11 @@ import static nnpia.st61014.NNPIA_SemPrace.domain.JobListing.toEntity;
 public class JobListingController {
     private final JobListingService jobListingService;
     private final AppUserService appUserService;
+
+    private final UsersInterestedInJobService usersInterestedInJobService;
     @Autowired
     JWTGenerator idDecode;
-    @PostMapping("/create")
+    @PutMapping("/create")
     public ResponseEntity<JobListingResponseDto> create(@RequestHeader (name="Authorization") String token, @RequestBody @Validated final JobListingInputDto input) throws ResourceNotFoundException {
         input.setListingPoster(appUserService.findById(Long.parseLong(idDecode.getIdFromJWT(token.substring(7)))));
         var result = jobListingService.save(toEntity(input));
@@ -41,6 +45,20 @@ public class JobListingController {
     @GetMapping("")
     public ResponseEntity<?> findAll() throws ResourceNotFoundException {
         var result = jobListingService.findAll();
+
+        return ResponseEntity.ok(result);
+    }
+
+    @GetMapping("/owned")
+    public ResponseEntity<?> findAllById(@RequestHeader (name="Authorization") String token) throws ResourceNotFoundException {
+        var result = jobListingService.findAllById(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
+
+        return ResponseEntity.ok(result);
+    }
+    @DeleteMapping("/remove")
+    public ResponseEntity<?> remove(@RequestHeader (name="Authorization") String token, @RequestBody final String jobId) throws ResourceNotFoundException {
+        usersInterestedInJobService.deleteAllByJobListingListingID(Long.parseLong(jobId));
+        var result = jobListingService.remove(Long.parseLong(jobId),Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
 
         return ResponseEntity.ok(result);
     }

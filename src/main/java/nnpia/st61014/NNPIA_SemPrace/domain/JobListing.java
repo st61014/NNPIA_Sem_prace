@@ -13,6 +13,8 @@ import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseInputDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.JobListingInputDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.JobListingResponseDto;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 
 
 import java.time.LocalDateTime;
@@ -36,6 +38,7 @@ public class JobListing {
 
     @ManyToOne()
     @JoinColumn(name="listingPosterID", nullable=false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
     //@ToString.Exclude
     @JsonBackReference
     private AppUser listingPoster;

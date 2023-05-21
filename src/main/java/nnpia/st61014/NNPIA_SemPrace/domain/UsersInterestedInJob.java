@@ -2,7 +2,9 @@ package nnpia.st61014.NNPIA_SemPrace.domain;
 
 import jakarta.persistence.*;
 import lombok.*;
+import nnpia.st61014.NNPIA_SemPrace.dto.JobListingInputDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.UsersInterestedInJobDto;
+import nnpia.st61014.NNPIA_SemPrace.dto.UsersInterestedInJobInputDto;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -28,12 +30,15 @@ public class UsersInterestedInJob {
     @Column
     private LocalDateTime creation_date;
 
+    public static UsersInterestedInJob toEntity(final UsersInterestedInJobInputDto input) {
+        return new UsersInterestedInJob(input.getApp_user(), input.getJob_listing(), input.getStatus(), input.getCreation_date());
+    }
     public UsersInterestedInJobDto toDto() {
         return new UsersInterestedInJobDto(
                 getAppUser().getUserID(),
                 getJobListing().getListingID(),
                 getStatus(),
-                getCreation_date()
+                getCreation_date().toString()
         );
     }
 }

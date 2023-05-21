@@ -8,6 +8,8 @@ import jakarta.validation.constraints.NotEmpty;
 import lombok.*;
 import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.AppUserResponseInputDto;
+import org.hibernate.annotations.OnDelete;
+import org.hibernate.annotations.OnDeleteAction;
 import org.hibernate.validator.constraints.*;
 
 import java.util.Collections;
@@ -49,6 +51,7 @@ public class AppUser {
 
     @EqualsAndHashCode.Exclude
     @OneToMany(mappedBy = "listingPoster")
+    @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<JobListing> jobListings = Collections.emptyList();
 /*

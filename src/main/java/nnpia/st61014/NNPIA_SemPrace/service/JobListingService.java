@@ -39,4 +39,24 @@ public class JobListingService {
 
         return result;
     }
+    @Transactional(readOnly = true)
+    public List<JobListing> findAllById(final long userId) throws ResourceNotFoundException {
+        var result = jobListingRepository.findAllByListingPosterUserID(userId);
+
+        if (result == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        return result;
+    }
+    @Transactional
+    public Integer remove(final long listingId, final long userId) throws ResourceNotFoundException {
+        var result = jobListingRepository.deleteByListingIDAndListingPosterUserID(listingId, userId);
+
+        if (result == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        return result;
+    }
 }
