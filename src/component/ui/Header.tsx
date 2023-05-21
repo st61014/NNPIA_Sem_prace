@@ -26,6 +26,7 @@ const Header = () => {
         <Stack spacing={2} direction="row">
             <Button variant="contained"><RouterLink to="job-listings" style={linkStyle}>Job
                 listings</RouterLink></Button>
+            <Button variant="contained"><RouterLink to="job-listings/owned" style={linkStyle}>My posted listings</RouterLink></Button>
             <Button variant="contained"><RouterLink to="job-interests" style={linkStyle}>My
                 interests</RouterLink></Button>
             <Button variant="contained"><RouterLink to="job-listing/create" style={linkStyle}>Create new job listing</RouterLink></Button>

@@ -8,8 +8,9 @@ interface Props {
 }
 
 function InterestedInOfferings() {
-    const [usersInterests, setUsersInterests] = useState<Array<UsersInterestedInJob>>([]);
+    const [usersInterests, setUsersInterests] = useState<Array<JobsInterestedIn>>([]);
     const [currentPage, setCurrentPage] = useState(0);
+    const [sortBySelect, setSortBySelect] = useState("status");
 
     useEffect(() => {
         fetchUsersInterestedListings();
@@ -19,7 +20,7 @@ function InterestedInOfferings() {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         //console.log(localStorage.getItem("token"));
         try {
-                const response = await fetch(`${backendUrl}/job-interest/test?page=${currentPage}`, {
+                const response = await fetch(`${backendUrl}/job-interest/user?page=${currentPage}&sort=${sortBySelect}`, {
                     headers: {
                         Authorization: `Bearer ${localStorage.getItem("token")}`,
                     },

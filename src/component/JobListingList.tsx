@@ -3,16 +3,16 @@ import JobListingCard from "./JobListingCard";
 
 interface Props {
     jobListings: Array<JobListing>
+    alreadyInterested:  Array<Number>
 }
 
-const JobListingList = ({jobListings} : Props) => {
-    const jobListingShowInterestHandle = () => {
-    }
+const JobListingList = ({jobListings, alreadyInterested} : Props) => {
     //console.log(jobListings);
+    //console.log(alreadyInterested);
     return <div>
         <h1>Jobs</h1>
         {jobListings.map(t =>
-            <JobListingCard key={t.id} job_listing={t} onJobShowInterest={jobListingShowInterestHandle} />
+            <JobListingCard key={t.listingID} job_listing={t} alreadyInterested={alreadyInterested}/>
         )}
     </div>
 };

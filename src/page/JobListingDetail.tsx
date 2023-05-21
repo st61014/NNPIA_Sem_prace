@@ -24,7 +24,7 @@ const JobListingDetail = () => {
 
     return <div>
         {loading && <div>Loading ...</div>}
-        {data && <JobListingCard job_listing={data} onJobShowInterest={() => {}} />}
+        {data && <JobListingCard job_listing={data} />}
     </div>
 };
 

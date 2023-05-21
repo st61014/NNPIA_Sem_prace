@@ -1,10 +1,11 @@
 export interface JobListing {
-    id: number
+    listingID: number
     jobField: string
     position: string
     pay: number
     listingPosterId: number
 }
+
 export interface AppUser {
     id: number
     currentWorkingField: string

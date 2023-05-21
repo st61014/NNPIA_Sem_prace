@@ -6,7 +6,7 @@ const CreateJobListing = () => {
     const [jobField, setJobField] = useState('');
     const [pay, setPay] = useState(0);
     const [position, setPosition] = useState('');
-    const id = -1;
+    const listingID = -1;
     const listingPosterId = -1;
 
     const handleSubmit = async (e: FormEvent) => {
@@ -14,7 +14,7 @@ const CreateJobListing = () => {
 
         // Create a new job listing object
         const jobListing: JobListing = {
-            id,
+            listingID,
             jobField,
             pay,
             position,
@@ -25,7 +25,7 @@ const CreateJobListing = () => {
             const backendUrl = import.meta.env.VITE_BACKEND_URL;
             // Make a POST request to the backend endpoint
             const response = await fetch(`${backendUrl}/job-listing/create`, {
-                method: 'POST',
+                method: 'PUT',
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`,
                     'Content-Type': 'application/json'
@@ -53,7 +53,7 @@ const CreateJobListing = () => {
 
         // Clear the form fields
         setJobField('');
-        setPay('');
+        setPay(0);
         setPosition('');
     };
 
@@ -72,9 +72,9 @@ const CreateJobListing = () => {
                 <div>
                     <label>Pay:</label>
                     <input
-                        type="text"
+                        type="number"
                         value={pay}
-                        onChange={(e) => setPay(e.target.value)}
+                        onChange={(e) => setPay(e.target.valueAsNumber)}
                     />
                 </div>
                 <div>
