@@ -80,4 +80,15 @@ public class UsersInterestedInJobService {
 
         return result;
     }
+
+    @Transactional
+    public Integer remove(final long listingId, final long userId) throws ResourceNotFoundException {
+        var result = usersInterestedInJobRepositoryRepository.deleteByJobListingListingIDAndAppUserUserID(listingId, userId);
+
+        if (result == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        return result;
+    }
 }

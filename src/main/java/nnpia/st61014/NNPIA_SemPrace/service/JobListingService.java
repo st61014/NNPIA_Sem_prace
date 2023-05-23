@@ -5,6 +5,9 @@ import nnpia.st61014.NNPIA_SemPrace.domain.AppUser;
 import nnpia.st61014.NNPIA_SemPrace.domain.JobListing;
 import nnpia.st61014.NNPIA_SemPrace.repository.AppUserRepository;
 import nnpia.st61014.NNPIA_SemPrace.repository.JobListingRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -30,8 +33,21 @@ public class JobListingService {
     }
 
     @Transactional(readOnly = true)
-    public List<JobListing> findAll() throws ResourceNotFoundException {
-        var result = jobListingRepository.findAll();
+    public List<JobListing> findAll(int page, String sortBy) throws ResourceNotFoundException {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sortBy));
+        var result = jobListingRepository.findAll(pageable).getContent();
+
+        if (result == null) {
+            throw new ResourceNotFoundException();
+        }
+
+        return result;
+    }
+
+    @Transactional(readOnly = true)
+    public List<JobListing> findAllNotOwnedByUser(final long userId, int page, String sortBy) throws ResourceNotFoundException {
+        Pageable pageable = PageRequest.of(page, 5, Sort.by(sortBy));
+        var result = jobListingRepository.findJobListingsByListingPoster_UserIDNot(userId, pageable).getContent();
 
         if (result == null) {
             throw new ResourceNotFoundException();

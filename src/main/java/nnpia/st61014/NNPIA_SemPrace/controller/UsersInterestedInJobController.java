@@ -35,18 +35,6 @@ public class UsersInterestedInJobController {
     @Autowired
     JWTGenerator idDecode;
 
-    /*
-    @GetMapping("/test")
-    public ResponseEntity<?> findByUserId(@RequestHeader (name="Authorization") String token) throws ResourceNotFoundException {
-        var result = usersInterestedInJobService.findByUserId(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
-        List<UsersInterestedInJobDto> DTOs = new ArrayList<>();
-        for (UsersInterestedInJob record : result) {
-            DTOs.add(record.toDto());
-        }
-        return ResponseEntity.ok(DTOs);
-    }
-
-     */
     @PutMapping("/create")
     public ResponseEntity<UsersInterestedInJobDto> create(@RequestHeader(name = "Authorization") String token, @RequestBody @Validated final UsersInterestedInJobDto input) throws ResourceNotFoundException {
         UsersInterestedInJobInputDto dtoWithClasses = new UsersInterestedInJobInputDto(appUserService.findById(Long.parseLong(idDecode.getIdFromJWT(token.substring(7)))), jobListingService.findById(input.getJob_listing_listingid()), input.getStatus(), LocalDateTime.parse(input.getCreation_date(), DateTimeFormatter.ISO_DATE_TIME));
@@ -66,11 +54,12 @@ public class UsersInterestedInJobController {
         List<Map<String, Object>> response = new ArrayList<>();
         for (Object[] interest : interests) {
             Map<String, Object> interestMap = new LinkedHashMap<>();
-            interestMap.put("job_field", interest[0]);
-            interestMap.put("position", interest[1]);
-            interestMap.put("pay", interest[2]);
-            interestMap.put("creation_date", interest[3]);
-            interestMap.put("status", interest[4]);
+            interestMap.put("job_listing_id", interest[0]);
+            interestMap.put("job_field", interest[1]);
+            interestMap.put("position", interest[2]);
+            interestMap.put("pay", interest[3]);
+            interestMap.put("creation_date", interest[4]);
+            interestMap.put("status", interest[5]);
             response.add(interestMap);
         }
         return ResponseEntity.ok(response);
@@ -86,5 +75,11 @@ public class UsersInterestedInJobController {
         var result = usersInterestedInJobService.findByJobId(id);
 
         return ResponseEntity.ok(result.toDto());
+    }
+    @DeleteMapping("/remove")
+    public ResponseEntity<?> remove(@RequestHeader (name="Authorization") String token, @RequestBody final String interestId) throws ResourceNotFoundException {
+        var result = usersInterestedInJobService.remove(Long.parseLong(interestId),Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
+
+        return ResponseEntity.ok(result);
     }
 }

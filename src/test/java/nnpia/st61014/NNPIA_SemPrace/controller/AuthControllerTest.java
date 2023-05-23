@@ -23,7 +23,7 @@ class AuthControllerTest {
     private JWTGenerator jwtGenerator;
 
     @Test
-    void login() {
+    void testRequestTokenAndReadContents() {
         Authentication authentication = authenticationManager.authenticate(
                 new UsernamePasswordAuthenticationToken(
                         "user1",

@@ -15,12 +15,13 @@ public interface UsersInterestedInJobRepository extends PagingAndSortingReposito
     List<UsersInterestedInJob> findUsersInterestedInJobByAppUserUserID(long userId);
     UsersInterestedInJob findUsersInterestedInJobByJobListingListingID(long listingId);
     UsersInterestedInJob save(UsersInterestedInJob usersInterestedInJob);
-    @Query("SELECT j.jobField, j.position, j.pay, i.creation_date,i.status FROM UsersInterestedInJob i JOIN JobListing j ON i.jobListing.listingID = j.listingID WHERE i.appUser.userID = :userId")
+    @Query("SELECT i.jobListing.listingID, j.jobField, j.position, j.pay, i.creation_date,i.status FROM UsersInterestedInJob i JOIN JobListing j ON i.jobListing.listingID = j.listingID WHERE i.appUser.userID = :userId")
     Page<Object[]> findInterestsByUserIdWithJobDetails(@Param("userId") Long userId, Pageable pageable);
     @Query("SELECT jobListing.listingID FROM UsersInterestedInJob WHERE appUser.userID = :userId")
     List<Number> findAllJobListingIdsFromInterests(@Param("userId") Long userId);
-
     Integer deleteAllByJobListingListingID(long listingId);
+
+    Integer deleteByJobListingListingIDAndAppUserUserID(long listingId, long userId);
 }
 
 

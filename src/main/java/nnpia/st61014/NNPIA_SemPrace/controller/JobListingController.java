@@ -11,6 +11,9 @@ import nnpia.st61014.NNPIA_SemPrace.service.JobListingService;
 import nnpia.st61014.NNPIA_SemPrace.service.ResourceNotFoundException;
 import nnpia.st61014.NNPIA_SemPrace.service.UsersInterestedInJobService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -42,9 +45,15 @@ public class JobListingController {
         return ResponseEntity.ok(result.toDto());
     }
 
-    @GetMapping("")
-    public ResponseEntity<?> findAll() throws ResourceNotFoundException {
-        var result = jobListingService.findAll();
+    @GetMapping("/all")
+    public ResponseEntity<?> findAll(@RequestParam("page") int page,@RequestParam("sort") String sortBy) throws ResourceNotFoundException {
+        var result = jobListingService.findAll(page, sortBy);
+
+        return ResponseEntity.ok(result);
+    }
+    @GetMapping("/all-not-owned")
+    public ResponseEntity<?> findAllNotOwnedByUser(@RequestHeader (name="Authorization") String token,  @RequestParam("page") int page,@RequestParam("sort") String sortBy) throws ResourceNotFoundException {
+        var result = jobListingService.findAllNotOwnedByUser(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))), page, sortBy);
 
         return ResponseEntity.ok(result);
     }
