@@ -1,18 +1,18 @@
-import {FormEvent, useState} from "react";
+import React, {FormEvent, useState} from "react";
 import {JobListing} from "../data/init-data";
+import {Box, Button, Container, CssBaseline, TextField, Typography} from "@mui/material";
 
 
 const CreateJobListing = () => {
-    const [jobField, setJobField] = useState('');
+    const [jobField, setJobField] = useState('Job field for position');
     const [pay, setPay] = useState(0);
-    const [position, setPosition] = useState('');
+    const [position, setPosition] = useState('Job position');
     const listingID = -1;
     const listingPosterId = -1;
 
     const handleSubmit = async (e: FormEvent) => {
         e.preventDefault();
 
-        // Create a new job listing object
         const jobListing: JobListing = {
             listingID,
             jobField,
@@ -33,20 +33,15 @@ const CreateJobListing = () => {
                 body: JSON.stringify(jobListing)
             });
 
-            // Check the response status
             if (response.ok) {
-                // Handle success
                 console.log('Job listing created successfully!');
-                // Clear the form fields
                 setJobField('');
                 setPay(0);
                 setPosition('');
             } else {
-                // Handle error
                 console.error('Failed to create job listing');
             }
         } catch (error) {
-            // Handle network or other errors
             console.error('An error occurred', error);
         }
 
@@ -56,6 +51,68 @@ const CreateJobListing = () => {
         setPay(0);
         setPosition('');
     };
+
+
+    return (
+        <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+                sx={{
+                    marginTop: 8,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    alignItems: 'center',
+                }}>
+                <Typography component="h1" variant="h5">
+                    Create new job listing
+                </Typography>
+                <Box component="form" onSubmit={handleSubmit} noValidate  sx={{ mt: 1 }}>
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="jobField"
+                        label={jobField}
+                        name="jobField"
+                        onChange={(e) => setJobField(e.target.value)}
+                        autoFocus
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        name="position"
+                        label={position}
+                        type="text"
+                        id="position"
+                        onChange={(e) => setPosition(e.target.value)}
+                        autoComplete="current-password"
+                    />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="pay"
+                        label="Job pay in $"
+                        type="number"
+                        name="pay"
+                        onChange={(e) => setPay(parseInt(e.target.value))}
+                        autoFocus
+                    />
+
+                    <Button
+                        type="submit"
+                        fullWidth
+                        variant="contained"
+                        sx={{ mt: 3, mb: 2 }}>
+                        Create listing
+                    </Button>
+                </Box>
+            </Box>
+        </Container>
+    );
+
+
 
     return (
         <div>

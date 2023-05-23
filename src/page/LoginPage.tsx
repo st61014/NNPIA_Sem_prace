@@ -1,11 +1,24 @@
 import React, {ChangeEvent, useState} from "react";
 import {setLogin} from "../features/login/loginSlice";
 import {useAppDispatch} from "../features/hook";
+import {useNavigate} from "react-router-dom";
+import {
+    Box, Button,
+    Checkbox,
+    Container,
+    CssBaseline,
+    FormControlLabel, Grid,
+    TextField,
+    ThemeProvider,
+    Typography
+} from "@mui/material";
+import Avatar from "@mui/material/Avatar";
 
 const LoginPage = () => {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
     const dispatch = useAppDispatch();
+    const navigate = useNavigate();
     const handleUsernameChange = (event: ChangeEvent<HTMLInputElement>) => {
         setUsername(event.target.value);
     };
@@ -22,41 +35,73 @@ const LoginPage = () => {
                 headers: {
                     "Content-Type": "application/json"
                 },
-                body: JSON.stringify({ username, password })
+                body: JSON.stringify({username, password})
             });
 
             if (response.ok) {
-                const { accessToken, tokenType, userID } = await response.json();
+                const {accessToken, tokenType, userID} = await response.json();
                 localStorage.setItem("token", accessToken);
                 localStorage.setItem("bearer", tokenType);
+                localStorage.setItem("loginFlag", "true");
+                localStorage.setItem("loggedUser", username);
                 dispatch(setLogin(true));
-                // Redirect or perform any other necessary action upon successful login
+                navigate("/job-listings")
             } else {
-                // Handle login error
             }
         } catch (error) {
             console.error("Error occurred during login:", error);
         }
     };
 
+
     return (
-        <div>
-            <h1>Login Page</h1>
-    <div>
-    <label>Username:</label>
-    <input type="text" value={username} onChange={handleUsernameChange} />
-    </div>
-    <div>
-    <label>Password:</label>
-    <input
-    type="password"
-    value={password}
-    onChange={handlePasswordChange}
-    />
-    </div>
-    <button onClick={handleLogin}>Login</button>
-        </div>
-);
+            <Container component="main" maxWidth="xs">
+                <CssBaseline />
+                <Box
+                    sx={{
+                        marginTop: 8,
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}>
+                    <Typography component="h1" variant="h5">
+                        Sign in
+                    </Typography>
+                    <Box sx={{ mt: 1 }}>
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            id="username"
+                            label="Username"
+                            name="username"
+                            onChange={handleUsernameChange}
+                            autoFocus
+                        />
+                        <TextField
+                            margin="normal"
+                            required
+                            fullWidth
+                            name="password"
+                            label="Password"
+                            type="password"
+                            id="password"
+                            onChange={handlePasswordChange}
+                            autoComplete="current-password"
+                        />
+                        <Button
+                            type="submit"
+                            fullWidth
+                            variant="contained"
+                            onClick={handleLogin}
+                            sx={{ mt: 3, mb: 2 }}>
+                            Sign In
+                        </Button>
+                    </Box>
+                </Box>
+            </Container>
+    );
+
 };
 
 export default LoginPage;

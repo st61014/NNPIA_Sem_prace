@@ -24,7 +24,7 @@ const JobListingDetail = () => {
 
     return <div>
         {loading && <div>Loading ...</div>}
-        {data && <JobListingCard job_listing={data} />}
+        {data && <JobListingCard job_listing={data}  alreadyInterested={[]}/>}
     </div>
 };
 

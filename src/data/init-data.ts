@@ -22,6 +22,7 @@ export interface UsersInterestedInJob {
 }
 
 export interface JobsInterestedIn {
+    job_listing_id: number
     job_field: string
     position: string
     pay: number

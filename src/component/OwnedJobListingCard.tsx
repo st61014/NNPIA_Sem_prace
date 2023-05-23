@@ -1,12 +1,14 @@
 import {JobListing} from "../data/init-data";
-import React from "react";
+import React, {useState} from "react";
+import {useNavigate} from "react-router-dom";
+import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mui/material";
 
 interface Props {
     job_listing: JobListing
-    alreadyInterested:  Array<Number>
 }
 
 const OwnedJobListingCard = ({job_listing} : Props) => {
+    const [interestedInListing, setInterestedInListing] = useState("");
     //console.log(alreadyInterested)
     const handleButtonClick = (jobId:number) => {
         // console.log(data);
@@ -19,16 +21,33 @@ const OwnedJobListingCard = ({job_listing} : Props) => {
             },
             body: JSON.stringify(jobId),
         })
+        setInterestedInListing("deleted");
     };
-    return <div>
-        <h2>{job_listing.position}</h2>
-        <p>{job_listing.jobField}</p>
-        <p>{job_listing.pay}</p>
-        <p>{job_listing.listingPosterId}</p>
-        <button onClick={() => handleButtonClick(job_listing.listingID)}>
-            Delete
-        </button>
-    </div>
+    if (interestedInListing == "deleted"){
+        return <></>
+    }
+
+    return (
+        <Card sx={{ maxWidth: 345 , mt: 2, ml: 2, mr: 2}}>
+            <CardContent>
+                <Typography gutterBottom variant="h5" component="div">
+                    {job_listing.position}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Job field: {job_listing.jobField}
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                    Position pay: {job_listing.pay}
+                </Typography>
+            </CardContent>
+            <CardActions>
+                <Button onClick={() => handleButtonClick(job_listing.listingID)}>
+                    Delete
+                </Button>
+            </CardActions>
+        </Card>
+    );
+
 }
 
 export default OwnedJobListingCard;

@@ -9,15 +9,12 @@ import {QueryClient, QueryClientProvider} from "@tanstack/react-query";
 import React from "react";
 import JobOfferings from "./page/InterestedInOfferings";
 import InterestedJobOfferingCard from "./component/InterestedJobOfferingCard";
-import InterestedJobOfferingDetail from "./page/InterestedJobOfferingDetail";
 import LoginPage from "./page/LoginPage";
 import InterestedInOfferings from "./page/InterestedInOfferings";
 import CreateJobListing from "./page/CreateJobListing";
 import OwnedJobListings from "./page/OwnedJobListings";
 
 const queryClient = new QueryClient();
-
-
 
 function App() {
     
@@ -33,7 +30,6 @@ function App() {
                         <Route path={"/job-interests"} element={<InterestedInOfferings/>}/>
                         <Route path={"/job-listings/owned"} element={<OwnedJobListings/>}/>
                         <Route path={"/job-listing/:id"} element={<JobListingDetail/>}/>
-                        <Route path={"/job-interest/:id"} element={<InterestedJobOfferingDetail/>}/>
                     </Routes>
                 </BrowserRouter>
             </Provider>
