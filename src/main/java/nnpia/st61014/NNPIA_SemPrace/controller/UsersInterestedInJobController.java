@@ -70,12 +70,7 @@ public class UsersInterestedInJobController {
         List<Number> interests = usersInterestedInJobService.findAllJobListingIdsFromInterests(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
         return ResponseEntity.ok(interests);
     }
-    @GetMapping("/job/{id}")
-    public ResponseEntity<?> findByJobId(@PathVariable final Long id) throws ResourceNotFoundException {
-        var result = usersInterestedInJobService.findByJobId(id);
 
-        return ResponseEntity.ok(result.toDto());
-    }
     @DeleteMapping("/remove")
     public ResponseEntity<?> remove(@RequestHeader (name="Authorization") String token, @RequestBody final String interestId) throws ResourceNotFoundException {
         var result = usersInterestedInJobService.remove(Long.parseLong(interestId),Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
