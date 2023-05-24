@@ -1,17 +1,31 @@
 import React, {FormEvent, useState} from "react";
 import {JobListing} from "../data/init-data";
 import {Box, Button, Container, CssBaseline, TextField, Typography} from "@mui/material";
+import { yupResolver } from '@hookform/resolvers/yup';
+import * as yup from "yup";
+import { useForm } from "react-hook-form";
 
+const resolver = yupResolver(yup.object({
+    "position": yup.string().max(128, "Max length 128 characters").required("Required field"),
+    "jobField": yup.string().max(128, "Max length 128 characters").required("Required field"),
+    "pay": yup.number().typeError("Pay must be a number").min(1).required("Required field")
+}));
+interface FormValues{
+    position: String
+    jobField: String
+    pay: Number
+}
 
 const CreateJobListing = () => {
+    const {register, handleSubmit, formState:{errors}} = useForm<FormValues>({resolver})
+    //const {register,handleSubmit, formState: { errors },} = useForm();
     const [jobField, setJobField] = useState('Job field for position');
     const [pay, setPay] = useState(0);
     const [position, setPosition] = useState('Job position');
     const listingID = -1;
     const listingPosterId = -1;
 
-    const handleSubmit = async (e: FormEvent) => {
-        e.preventDefault();
+    const submitHandle = async (data: FormValues) => {
 
         const jobListing: JobListing = {
             listingID,
@@ -47,8 +61,6 @@ const CreateJobListing = () => {
         setPay(0);
         setPosition('');
     };
-
-
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline/>
@@ -62,9 +74,9 @@ const CreateJobListing = () => {
                 <Typography component="h1" variant="h5">
                     Create new job listing
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
-
+                <Box component="form" onSubmit={handleSubmit(submitHandle)} noValidate sx={{mt: 1}}>
                     <TextField
+                        {...register("position")}
                         margin="normal"
                         required
                         fullWidth
@@ -74,8 +86,10 @@ const CreateJobListing = () => {
                         id="position"
                         onChange={(e) => setPosition(e.target.value)}
                         autoComplete="current-password"
+                        helperText={errors.position?.message}
                     />
                     <TextField
+                        {...register("jobField")}
                         margin="normal"
                         required
                         fullWidth
@@ -84,9 +98,11 @@ const CreateJobListing = () => {
                         name="jobField"
                         onChange={(e) => setJobField(e.target.value)}
                         autoFocus
+                        helperText={errors.jobField?.message}
                     />
 
                     <TextField
+                        {...register("pay")}
                         margin="normal"
                         required
                         fullWidth
@@ -96,6 +112,7 @@ const CreateJobListing = () => {
                         name="pay"
                         onChange={(e) => setPay(parseInt(e.target.value))}
                         autoFocus
+                        helperText={errors.pay?.message}
                     />
 
                     <Button
@@ -108,40 +125,6 @@ const CreateJobListing = () => {
                 </Box>
             </Box>
         </Container>
-    );
-
-
-    return (
-        <div>
-            <h1>Create Job Listing</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Job Field:</label>
-                    <input
-                        type="text"
-                        value={jobField}
-                        onChange={(e) => setJobField(e.target.value)}
-                    />
-                </div>
-                <div>
-                    <label>Pay:</label>
-                    <input
-                        type="number"
-                        value={pay}
-                        onChange={(e) => setPay(e.target.valueAsNumber)}
-                    />
-                </div>
-                <div>
-                    <label>Position:</label>
-                    <input
-                        type="text"
-                        value={position}
-                        onChange={(e) => setPosition(e.target.value)}
-                    />
-                </div>
-                <button type="submit">Create</button>
-            </form>
-        </div>
     );
 };
 
