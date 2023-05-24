@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:memorydb;DB_CLOSE_DELAY=-1;INIT=CREATE SCHEMA IF NOT EXISTS NNPIA
+  liquibase:
+    enabled: false
+  jpa:
+    hibernate:
+      ddl-auto: create
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        default_schema: NNPIA
+

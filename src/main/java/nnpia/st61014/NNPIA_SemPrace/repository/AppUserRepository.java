@@ -11,6 +11,8 @@ import java.util.Optional;
 public interface AppUserRepository extends PagingAndSortingRepository<AppUser, Long> {
     AppUser findAppUserByUserIDEquals(long userId);
     Optional<AppUser> findAppUserByUsername(String username);
+    AppUser save(AppUser user);
+    AppUser deleteAll();
 
 }
 

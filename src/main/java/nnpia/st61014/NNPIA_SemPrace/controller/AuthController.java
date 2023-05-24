@@ -23,7 +23,6 @@ public class AuthController {
 
     private AuthenticationManager authenticationManager;
     private AppUserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
     private JWTGenerator jwtGenerator;
 
 
@@ -38,24 +37,5 @@ public class AuthController {
         String token = jwtGenerator.generateToken(authentication, userID);
         return new ResponseEntity<>(new AuthResponseDto(token), HttpStatus.OK);
     }
-/*
-    @PostMapping("register")
-    public ResponseEntity<String> register(@RequestBody RegisterDto registerDto) {
-        if (userRepository.existsByUsername(registerDto.getUsername())) {
-            return new ResponseEntity<>("Username is taken!", HttpStatus.BAD_REQUEST);
-        }
 
-        UserEntity user = new UserEntity();
-        user.setUsername(registerDto.getUsername());
-        user.setPassword(passwordEncoder.encode((registerDto.getPassword())));
-
-        Role roles = roleRepository.findByName("USER").get();
-        user.setRoles(Collections.singletonList(roles));
-
-        userRepository.save(user);
-
-        return new ResponseEntity<>("User registered success!", HttpStatus.OK);
-    }
-
- */
 }
