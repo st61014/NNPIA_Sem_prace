@@ -7,7 +7,6 @@ import {RootState} from "../features/store";
 import {useTask} from "../features/hook/hooks";
 import {useQueries, useQuery} from "@tanstack/react-query";
 import {queryKey} from "@tanstack/react-query/build/lib/__tests__/utils";
-import JobListingForm from "../component/JobListingForm";
 import header from "../component/ui/Header";
 import JobListingCard from "../component/JobListingCard";
 import OwnedJobListingCard from "../component/OwnedJobListingCard";
@@ -56,7 +55,6 @@ const OwnedJobListings = () => {
             </Grid>
         </div>
     }
-    //console.log(alreadyInterested);
 
 };
 

@@ -23,7 +23,6 @@ const CreateJobListing = () => {
 
         try {
             const backendUrl = import.meta.env.VITE_BACKEND_URL;
-            // Make a POST request to the backend endpoint
             const response = await fetch(`${backendUrl}/job-listing/create`, {
                 method: 'PUT',
                 headers: {
@@ -34,7 +33,6 @@ const CreateJobListing = () => {
             });
 
             if (response.ok) {
-                console.log('Job listing created successfully!');
                 setJobField('');
                 setPay(0);
                 setPosition('');
@@ -45,8 +43,6 @@ const CreateJobListing = () => {
             console.error('An error occurred', error);
         }
 
-
-        // Clear the form fields
         setJobField('');
         setPay(0);
         setPosition('');
@@ -55,7 +51,7 @@ const CreateJobListing = () => {
 
     return (
         <Container component="main" maxWidth="xs">
-            <CssBaseline />
+            <CssBaseline/>
             <Box
                 sx={{
                     marginTop: 8,
@@ -66,17 +62,8 @@ const CreateJobListing = () => {
                 <Typography component="h1" variant="h5">
                     Create new job listing
                 </Typography>
-                <Box component="form" onSubmit={handleSubmit} noValidate  sx={{ mt: 1 }}>
-                    <TextField
-                        margin="normal"
-                        required
-                        fullWidth
-                        id="jobField"
-                        label={jobField}
-                        name="jobField"
-                        onChange={(e) => setJobField(e.target.value)}
-                        autoFocus
-                    />
+                <Box component="form" onSubmit={handleSubmit} noValidate sx={{mt: 1}}>
+
                     <TextField
                         margin="normal"
                         required
@@ -88,6 +75,17 @@ const CreateJobListing = () => {
                         onChange={(e) => setPosition(e.target.value)}
                         autoComplete="current-password"
                     />
+                    <TextField
+                        margin="normal"
+                        required
+                        fullWidth
+                        id="jobField"
+                        label={jobField}
+                        name="jobField"
+                        onChange={(e) => setJobField(e.target.value)}
+                        autoFocus
+                    />
+
                     <TextField
                         margin="normal"
                         required
@@ -104,14 +102,13 @@ const CreateJobListing = () => {
                         type="submit"
                         fullWidth
                         variant="contained"
-                        sx={{ mt: 3, mb: 2 }}>
+                        sx={{mt: 3, mb: 2}}>
                         Create listing
                     </Button>
                 </Box>
             </Box>
         </Container>
     );
-
 
 
     return (

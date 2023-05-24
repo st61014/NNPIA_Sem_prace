@@ -10,8 +10,7 @@ interface Props {
 }
 
 const JobListingList = ({jobListings, alreadyInterested}: Props) => {
-    //console.log(jobListings);
-    //console.log(alreadyInterested);
+
     return <div>
             <Grid container spacing={2} direction="row" columnSpacing={{ xs: 1, sm: 2, md: 3 }} justifyContent="center"
                   alignItems="center">

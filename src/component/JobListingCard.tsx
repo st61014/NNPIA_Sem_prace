@@ -19,7 +19,6 @@ const JobListingCard = ({job_listing, alreadyInterested} : Props) => {
             status: 'open',
             creation_date: new Date().toISOString(),
         };
-       // console.log(data);
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         fetch(`${backendUrl}/job-interest/create`, {
             method: 'PUT',
@@ -30,22 +29,9 @@ const JobListingCard = ({job_listing, alreadyInterested} : Props) => {
             body: JSON.stringify(data),
         })
         setJobListing("interested");
-
-        /*
-            .then((response) => response.json())
-            .then((data) => {
-                // Handle the response if necessary
-                console.log(data);
-            })
-            .catch((error) => {
-                // Handle errors
-                console.error(error);
-            });
-         */
-
     };
-    //console.log(job_listing);
-    if (alreadyInterested.includes(job_listing.listingID) || alreadyInterested.at(0) == -1 || jobListing == "interested"){
+
+    if (alreadyInterested.includes(job_listing.listingID) || jobListing == "interested"){
         return (
             <Card sx={{ maxWidth: 345 , mt: 2, ml: 2, mr: 2}}>
                 <CardContent>
@@ -66,7 +52,29 @@ const JobListingCard = ({job_listing, alreadyInterested} : Props) => {
                 </CardActions>
             </Card>
         );
+    }else if (alreadyInterested.at(0) == -1){
+        return (
+            <Card sx={{ maxWidth: 345 , mt: 2, ml: 2, mr: 2}}>
+                <CardContent>
+                    <Typography gutterBottom variant="h5" component="div">
+                        {job_listing.position}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Job field: {job_listing.jobField}
+                    </Typography>
+                    <Typography variant="body2" color="text.secondary">
+                        Position pay: {job_listing.pay}
+                    </Typography>
+                </CardContent>
+                <CardActions>
+                    <Button disabled>
+                        Log in to show interest
+                    </Button>
+                </CardActions>
+            </Card>
+        );
     }
+
 
     return (
         <Card sx={{ maxWidth: 345 , mt: 2, ml: 2, mr: 2}}>

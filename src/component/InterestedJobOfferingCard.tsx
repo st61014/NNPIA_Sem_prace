@@ -22,13 +22,9 @@ const InterestedJobOfferingCard = ({interested_in_offering} : Props) => {
 
         setJobListing("deleted");
     };
-    //console.log(interested_in_offering.job_listing_id);
     if (jobListing == "deleted"){
         return <></>
     }
-
-
-
 
     return (
         <Card sx={{ maxWidth: 345 , mt: 2, ml: 2, mr: 2}}>

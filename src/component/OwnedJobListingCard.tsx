@@ -9,9 +9,7 @@ interface Props {
 
 const OwnedJobListingCard = ({job_listing} : Props) => {
     const [interestedInListing, setInterestedInListing] = useState("");
-    //console.log(alreadyInterested)
     const handleButtonClick = (jobId:number) => {
-        // console.log(data);
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         fetch(`${backendUrl}/job-listing/remove`, {
             method: 'DELETE',

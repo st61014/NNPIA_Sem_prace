@@ -34,7 +34,6 @@ function InterestedInOfferings() {
     };
     const fetchUsersInterestedListings = async () => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
-        //console.log(localStorage.getItem("token"));
         try {
             const response = await fetch(`${backendUrl}/job-interest/user?page=${currentPage}&sort=${sortBySelect}`, {
                 headers: {
@@ -48,7 +47,6 @@ function InterestedInOfferings() {
         }
     };
 
-    //console.log(usersInterests);
     return (
         <div style={{width: '100%'}}>
             <Grid container spacing={2} direction="row" columnSpacing={{xs: 1, sm: 2, md: 3}} justifyContent="center"
