@@ -47,13 +47,18 @@ function InterestedInOfferings() {
         }
     };
 
+    const deleteHandle = (id: number) => {
+       const filteredUsersInterests = usersInterests.filter(value => value.job_listing_id != id)
+        setUsersInterests(filteredUsersInterests)
+    };
+
     return (
         <div style={{width: '100%'}}>
             <Grid container spacing={2} direction="row" columnSpacing={{xs: 1, sm: 2, md: 3}} justifyContent="center"
                   alignItems="center">
                 {usersInterests.map(t =>
                     <Grid item xs={6} lg={3} xl={2} key={usersInterests.indexOf(t)}>
-                        <InterestedJobOfferingCard key={t.creation_date} interested_in_offering={t}/>
+                        <InterestedJobOfferingCard key={t.creation_date} interested_in_offering={t} onDelete={deleteHandle}/>
                     </Grid>
                 )}
             </Grid>

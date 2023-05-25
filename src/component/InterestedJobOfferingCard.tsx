@@ -4,9 +4,10 @@ import {Button, Card, CardActions, CardContent, CardMedia, Typography} from "@mu
 
 interface Props {
     interested_in_offering: JobsInterestedIn
+    onDelete: (job: number)=> void
 }
 
-const InterestedJobOfferingCard = ({interested_in_offering} : Props) => {
+const InterestedJobOfferingCard = ({interested_in_offering, onDelete} : Props) => {
     const [jobListing, setJobListing] = useState("");
     const handleDelete = (interestRecordId:number) => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
@@ -21,6 +22,7 @@ const InterestedJobOfferingCard = ({interested_in_offering} : Props) => {
         })
 
         setJobListing("deleted");
+        onDelete(interestRecordId);
     };
     if (jobListing == "deleted"){
         return <></>
