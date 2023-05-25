@@ -47,7 +47,6 @@ public class SecurityConfig {
                         .permitAll()
                         .anyRequest().authenticated()
                 ).formLogin().disable()
-                // .httpBasic(Customizer.withDefaults());
                 .httpBasic(httpBasicConfigurer_ -> {
                     httpBasicConfigurer_.authenticationEntryPoint(authEntryPoint);
                 });

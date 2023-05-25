@@ -54,21 +54,6 @@ public class AppUser {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonManagedReference
     private List<JobListing> jobListings = Collections.emptyList();
-/*
-    @EqualsAndHashCode.Exclude
-    @OneToMany(mappedBy = "userInterestedInListing")
-    private List<UsersInterestedInJob> interestedInJobs = Collections.emptyList();
-
- */
-
-
-/*
-    @ManyToMany(mappedBy = "usersInterestedInListing")
-    @ToString.Exclude
-    @JsonIgnore
-    private List<AppUser> interestedListings = Collections.emptyList();
-
- */
 
     public AppUser(Long id, String username, String password, String firstName, String lastName, String currentWorkingField) {
         this.userID = id;

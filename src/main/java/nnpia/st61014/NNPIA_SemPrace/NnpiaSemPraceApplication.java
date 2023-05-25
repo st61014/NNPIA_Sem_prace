@@ -10,4 +10,6 @@ public class NnpiaSemPraceApplication {
 		SpringApplication.run(NnpiaSemPraceApplication.class, args);
 	}
 
+	//TODO: JPA REPOSITORY
+	//TODO: Security package rozházet do ostatních packages
 }

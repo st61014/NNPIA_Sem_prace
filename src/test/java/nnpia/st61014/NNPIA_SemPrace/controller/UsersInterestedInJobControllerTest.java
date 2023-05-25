@@ -91,6 +91,7 @@ class UsersInterestedInJobControllerTest {
         Long userID = appUserRepository.findAppUserByUsername("username").get().getUserID();
         String token = jwtGenerator.generateToken(auth, userID);
 
+        //TODO: stavba objeku do metody
         Object[] contentInPage = new Object[6];
         contentInPage[0] = 200;
         contentInPage[1] = "tech company";

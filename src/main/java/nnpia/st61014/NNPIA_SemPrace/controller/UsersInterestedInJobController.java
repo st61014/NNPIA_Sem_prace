@@ -38,7 +38,6 @@ public class UsersInterestedInJobController {
     @PutMapping("/create")
     public ResponseEntity<UsersInterestedInJobDto> create(@RequestHeader(name = "Authorization") String token, @RequestBody @Validated final UsersInterestedInJobDto input) throws ResourceNotFoundException {
         UsersInterestedInJobInputDto dtoWithClasses = new UsersInterestedInJobInputDto(appUserService.findById(Long.parseLong(idDecode.getIdFromJWT(token.substring(7)))), jobListingService.findById(input.getJob_listing_listingid()), input.getStatus(), LocalDateTime.parse(input.getCreation_date(), DateTimeFormatter.ISO_DATE_TIME));
-        //input.setApp_user_userid(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))));
         var result = usersInterestedInJobService.save(toEntity(dtoWithClasses));
 
         return ResponseEntity.ok(result.toDto());

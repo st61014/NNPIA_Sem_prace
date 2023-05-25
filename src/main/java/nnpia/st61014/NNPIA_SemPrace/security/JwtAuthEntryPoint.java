@@ -25,10 +25,4 @@ public class JwtAuthEntryPoint implements AuthenticationEntryPoint {
         response.setStatus(status.value());
         response.sendError(status.value(), "Unauthorized Access");
     }
-/*
-    @Override
-    public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
-        response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-    }
-    */
 }
