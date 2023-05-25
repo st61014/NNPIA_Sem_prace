@@ -8,7 +8,6 @@ interface Props {
 }
 
 const InterestedJobOfferingCard = ({interested_in_offering, onDelete} : Props) => {
-    const [jobListing, setJobListing] = useState("");
     const handleDelete = (interestRecordId:number) => {
         const backendUrl = import.meta.env.VITE_BACKEND_URL;
         fetch(`${backendUrl}/job-interest/remove`, {
@@ -21,12 +20,8 @@ const InterestedJobOfferingCard = ({interested_in_offering, onDelete} : Props) =
             body: JSON.stringify(interestRecordId),
         })
 
-        setJobListing("deleted");
         onDelete(interestRecordId);
     };
-    if (jobListing == "deleted"){
-        return <></>
-    }
 
     return (
         <Card sx={{ maxWidth: 345 , mt: 2, ml: 2, mr: 2}}>
