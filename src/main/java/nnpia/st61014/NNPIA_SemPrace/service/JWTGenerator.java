@@ -1,18 +1,15 @@
-package nnpia.st61014.NNPIA_SemPrace.security;
+package nnpia.st61014.NNPIA_SemPrace.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import lombok.NoArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import nnpia.st61014.NNPIA_SemPrace.config.SecurityConstants;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.authentication.AuthenticationCredentialsNotFoundException;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.AuthenticationException;
 import org.springframework.stereotype.Component;
 
-import java.util.Base64;
 import java.util.Date;
 @Slf4j
 @Component

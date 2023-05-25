@@ -2,30 +2,19 @@ package nnpia.st61014.NNPIA_SemPrace.controller;
 
 import nnpia.st61014.NNPIA_SemPrace.NnpiaSemPraceApplication;
 import nnpia.st61014.NNPIA_SemPrace.domain.AppUser;
-import nnpia.st61014.NNPIA_SemPrace.dto.AuthResponseDto;
 import nnpia.st61014.NNPIA_SemPrace.repository.AppUserRepository;
-import nnpia.st61014.NNPIA_SemPrace.security.JWTGenerator;
-import nnpia.st61014.NNPIA_SemPrace.security.JwtAuthEntryPoint;
-import nnpia.st61014.NNPIA_SemPrace.security.SecurityConfig;
+import nnpia.st61014.NNPIA_SemPrace.service.JWTGenerator;
 import nnpia.st61014.NNPIA_SemPrace.service.AppUserService;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.context.TestConfiguration;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -38,7 +27,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.BDDMockito.given;
 
 @SpringBootTest(
         webEnvironment = SpringBootTest.WebEnvironment.MOCK,

@@ -5,13 +5,14 @@ import nnpia.st61014.NNPIA_SemPrace.domain.JobListing;
 import nnpia.st61014.NNPIA_SemPrace.domain.UsersInterestedInJob;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.PagingAndSortingRepository;
 import org.springframework.data.repository.query.Param;
 
 import java.util.List;
 
-public interface UsersInterestedInJobRepository extends PagingAndSortingRepository<UsersInterestedInJob,Long> {
+public interface UsersInterestedInJobRepository extends PagingAndSortingRepository<UsersInterestedInJob,Long>, JpaRepository<UsersInterestedInJob, Long> {
     List<UsersInterestedInJob> findUsersInterestedInJobByAppUserUserID(long userId);
     UsersInterestedInJob findUsersInterestedInJobByJobListingListingID(long listingId);
     UsersInterestedInJob save(UsersInterestedInJob usersInterestedInJob);
@@ -20,7 +21,6 @@ public interface UsersInterestedInJobRepository extends PagingAndSortingReposito
     @Query("SELECT jobListing.listingID FROM UsersInterestedInJob WHERE appUser.userID = :userId")
     List<Number> findAllJobListingIdsFromInterests(@Param("userId") Long userId);
     Integer deleteAllByJobListingListingID(long listingId);
-
     Integer deleteByJobListingListingIDAndAppUserUserID(long listingId, long userId);
 }
 

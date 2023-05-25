@@ -1,4 +1,4 @@
-package nnpia.st61014.NNPIA_SemPrace.security;
+package nnpia.st61014.NNPIA_SemPrace.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

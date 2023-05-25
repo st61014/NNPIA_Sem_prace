@@ -1,19 +1,14 @@
 package nnpia.st61014.NNPIA_SemPrace.controller;
 
 import lombok.AllArgsConstructor;
-import nnpia.st61014.NNPIA_SemPrace.domain.JobListing;
-import nnpia.st61014.NNPIA_SemPrace.domain.UsersInterestedInJob;
 import nnpia.st61014.NNPIA_SemPrace.dto.JobListingInputDto;
 import nnpia.st61014.NNPIA_SemPrace.dto.JobListingResponseDto;
-import nnpia.st61014.NNPIA_SemPrace.security.JWTGenerator;
+import nnpia.st61014.NNPIA_SemPrace.service.JWTGenerator;
 import nnpia.st61014.NNPIA_SemPrace.service.AppUserService;
 import nnpia.st61014.NNPIA_SemPrace.service.JobListingService;
 import nnpia.st61014.NNPIA_SemPrace.service.ResourceNotFoundException;
 import nnpia.st61014.NNPIA_SemPrace.service.UsersInterestedInJobService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;

@@ -1,37 +1,20 @@
 package nnpia.st61014.NNPIA_SemPrace.controller;
 
-import io.jsonwebtoken.Jwts;
-import io.jsonwebtoken.SignatureAlgorithm;
 import nnpia.st61014.NNPIA_SemPrace.NnpiaSemPraceApplication;
 import nnpia.st61014.NNPIA_SemPrace.domain.AppUser;
 import nnpia.st61014.NNPIA_SemPrace.domain.JobListing;
-import nnpia.st61014.NNPIA_SemPrace.domain.UsersInterestedInJob;
-import nnpia.st61014.NNPIA_SemPrace.repository.UsersInterestedInJobRepository;
-import nnpia.st61014.NNPIA_SemPrace.security.JWTGenerator;
-import nnpia.st61014.NNPIA_SemPrace.security.SecurityConstants;
 import nnpia.st61014.NNPIA_SemPrace.service.JobListingService;
-import nnpia.st61014.NNPIA_SemPrace.service.UsersInterestedInJobService;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.data.domain.Page;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
-import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.test.context.support.WithMockUser;
 import org.springframework.test.web.servlet.MockMvc;
 
 import java.util.*;
 
 import static net.bytebuddy.matcher.ElementMatchers.is;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
