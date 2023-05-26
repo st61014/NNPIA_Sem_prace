@@ -27,6 +27,8 @@ import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.test.context.TestPropertySource;
 import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.test.web.servlet.MvcResult;
+import org.springframework.test.web.servlet.ResultActions;
 
 import java.util.*;
 
@@ -34,6 +36,7 @@ import static net.bytebuddy.matcher.ElementMatchers.is;
 import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest(
@@ -52,7 +55,9 @@ class UsersInterestedInJobControllerTest {
     JWTGenerator jwtGenerator;
     @MockBean
     private UsersInterestedInJobService service;
-    Page<Object[]> pageData = Mockito.mock(Page.class);;
+    Page<Object[]> pageData = Mockito.mock(Page.class);
+    ;
+
     @BeforeEach
     void setup() {
         MockitoAnnotations.openMocks(this);
@@ -61,36 +66,42 @@ class UsersInterestedInJobControllerTest {
         appUserRepository.save(appUser);
     }
 
+    private Object[] createRecordForPageContent(long id, String jobField, String position, double pay, String creationDate, String status) {
+        Object[] body = new Object[6];
+        body[0] = id;
+        body[1] = jobField;
+        body[2] = position;
+        body[3] = pay;
+        body[4] = creationDate;
+        body[5] = status;
+        return body;
+    }
+
     @AfterEach
     void tearDown() {
         appUserRepository.deleteAll();
     }
+
     @Test
     void getInterestsByUserId() throws Exception {
 
-        Collection< GrantedAuthority > auths = new ArrayList<>();
+        Collection<GrantedAuthority> auths = new ArrayList<>();
         auths.add(new SimpleGrantedAuthority("USER"));
-        UserDetails userDetails = new User("username","password", auths);
-        Authentication auth = new UsernamePasswordAuthenticationToken (userDetails.getUsername (),userDetails.getPassword (),userDetails.getAuthorities ());
+        UserDetails userDetails = new User("username", "password", auths);
+        Authentication auth = new UsernamePasswordAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
 
         SecurityContextHolder.getContext().setAuthentication(auth);
         Long userID = appUserRepository.findAppUserByUsername("username").get().getUserID();
         String token = jwtGenerator.generateToken(auth, userID);
 
-        //TODO: stavba objeku do metody
-        Object[] contentInPage = new Object[6];
-        contentInPage[0] = 200;
-        contentInPage[1] = "tech company";
-        contentInPage[2] = "chief engineer";
-        contentInPage[3] = 12000;
-        contentInPage[4] = "2023-05-23T17:34:55.294";
-        contentInPage[5] = "open";
-        pageData.toSet();
+        List<Object[]> recordsInContent = new ArrayList<>();
+        recordsInContent.add(createRecordForPageContent(200L, "tech company", "chief engineer", 1200.0, "2023-05-23T17:34:55.294", "open"));
 
+        given(pageData.getContent()).willReturn(recordsInContent);
         given(service.findInterestsByUserIdWithJobDetails(1L, 0, "pay")).willReturn(pageData);
 
-        mvc.perform(get("/job-listing/all?page=0&sort=pay").header(HttpHeaders.AUTHORIZATION, "Bearer "+token)
+        mvc.perform(get("/job-interest/user?page=0&sort=pay").header(HttpHeaders.AUTHORIZATION, "Bearer " + token)
                         .contentType(MediaType.APPLICATION_JSON))
-                .andExpect(status().isOk()).andReturn();
+                .andExpect(status().isOk()).andExpect(content().json("[{\"job_listing_id\":200,\"job_field\":\"tech company\",\"position\":\"chief engineer\",\"pay\":1200.0,\"creation_date\":\"2023-05-23T17:34:55.294\",\"status\":\"open\"}]"));
     }
 }

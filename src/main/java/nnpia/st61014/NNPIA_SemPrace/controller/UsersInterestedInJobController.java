@@ -46,7 +46,7 @@ public class UsersInterestedInJobController {
         Page<Object[]> interests = usersInterestedInJobService.findInterestsByUserIdWithJobDetails(Long.parseLong(idDecode.getIdFromJWT(token.substring(7))), page, sortBy);
         List<Object[]> content = interests.getContent();
         List<Map<String, Object>> response = new ArrayList<>();
-        for (Object[] interest : interests) {
+        for (Object[] interest : content) {
             Map<String, Object> interestMap = new LinkedHashMap<>();
             interestMap.put("job_listing_id", interest[0]);
             interestMap.put("job_field", interest[1]);
